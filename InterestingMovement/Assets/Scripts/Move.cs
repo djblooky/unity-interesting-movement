@@ -28,69 +28,17 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        this.DisplayHUD();
         this.KeepOnScreen();
         this.UpdateMovement();
     }
 
-    void UpdateBasedOnState()
+    void DisplayHUD()
     {
-        switch (currentMovementState)
-        {
-            case MovementState.SpeedToggle:
-                speed = 0;
-     
-                if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                {
-                    speed += 1;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                {
-                    speed -= 1;
-                }
-                break;
 
-            case MovementState.DirectionToggle:
-                if (Input.anyKeyDown) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
-                {
-                    speed = 0;
-                }
-                else if (Input.inputString.Length > 1) //if more than one key down
-                {
-                    speed = 100;
-                }
-                else
-                {
-                    speed = 50;
-                }
-                break;
-
-            case MovementState.Reverse:
-
-                if (Input.anyKeyDown) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
-                {
-                    if (speed > 0)
-                    {
-                        speed += acceleration;
-                    }
-                }
-                else
-                {
-                    if (speed < maxSpeed)
-                    {
-                        speed -= acceleration;
-                    }
-                }
-                break;
-
-        }
-
-        //normalize vector
-        if (direction.magnitude >= 1.0)
-        {
-            direction.Normalize();
-        }
     }
+
+   
 
     void KeepOnScreen()
     {
@@ -161,7 +109,7 @@ public class Move : MonoBehaviour
 
     void UpdateMovement()
     {
-        this.UpdateBasedOnState();
+       // this.UpdateBasedOnState();
         this.UpdateKeyInput();
 
         //time corrected movement
